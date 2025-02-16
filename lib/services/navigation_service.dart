@@ -15,8 +15,8 @@ class NavigationService extends GetxService {
     return [
       const HomePage(),
       const Search(),
+      Threads(),
       const Notifications(),
-      const Threads(),
       const Profile(),
     ];
   }
@@ -25,5 +25,10 @@ class NavigationService extends GetxService {
   void updateIndex(int index) {
     previousIndex.value = currentIndex.value;
     currentIndex.value = index;
+  }
+
+  // Back to prev page
+  void backToPreviouspage() {
+    currentIndex.value = previousIndex.value;
   }
 }
