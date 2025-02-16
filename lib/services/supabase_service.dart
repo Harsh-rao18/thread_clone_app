@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:thread_clone_app/utils/env.dart';
 
 class SupabaseService extends GetxService {
+  
   Rx<User?> currentUser = Rx<User?>(null);
 
   @override
@@ -24,6 +25,8 @@ class SupabaseService extends GetxService {
     client.auth.onAuthStateChange.listen((data) {
       final AuthChangeEvent event = data.event;
       if (event == AuthChangeEvent.userUpdated) {
+        currentUser.value = data.session?.user;
+      } else if (event == AuthChangeEvent.signedIn) {
         currentUser.value = data.session?.user;
       }
     });

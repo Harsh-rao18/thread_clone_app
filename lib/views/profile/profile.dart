@@ -24,7 +24,9 @@ class _ProfileState extends State<Profile> {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(RouteNames.settings);
+            },
             icon: Icon(Icons.sort_rounded),
           ),
         ],
@@ -60,8 +62,8 @@ class _ProfileState extends State<Profile> {
                                       width: context.width * 0.70,
                                       child: Text(supabaseService
                                               .currentUser
-                                              .value!
-                                              .userMetadata?["description"] ??
+                                              .value
+                                              ?.userMetadata?["description"] ??
                                           ' Hello!!'),
                                     ),
                                   ],
@@ -71,7 +73,7 @@ class _ProfileState extends State<Profile> {
                             child: ImageCircle(
                               radius: 40,
                               url: supabaseService
-                                  .currentUser.value!.userMetadata?["image"],
+                                  .currentUser.value?.userMetadata?["image"],
                             ),
                           ),
                         ],
