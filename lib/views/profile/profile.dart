@@ -132,10 +132,10 @@ class _ProfileState extends State<Profile> {
             children: [
               Center(
                   child:
-                      Text("Threads Content")), // Replace with actual content
+                      Text("Threads Content")), 
               Center(
                   child:
-                      Text("Replies Content")), // Replace with actual content
+                      Text("Replies Content")), 
             ],
           ),
         ),
