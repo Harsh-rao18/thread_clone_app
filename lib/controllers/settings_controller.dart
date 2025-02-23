@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:thread_clone_app/route/route_names.dart';
-import 'package:thread_clone_app/services/storage_service.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/utils/storage_keys.dart';
+import 'package:thread_clone_app/core/route/route_names.dart';
+import 'package:thread_clone_app/core/services/storage_service.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/utils/storage_keys.dart';
 
 class SettingsController extends GetxController {
   void logout() async {

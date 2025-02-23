@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:thread_clone_app/utils/helpers.dart';
+import 'package:thread_clone_app/core/utils/helpers.dart';
 
 class ImageCircle extends StatelessWidget {
   final double radius;

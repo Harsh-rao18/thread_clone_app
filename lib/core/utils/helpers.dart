@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:thread_clone_app/utils/env.dart';
-import 'package:thread_clone_app/widgets/confirm_dialog.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:thread_clone_app/core/utils/env.dart';
+import 'package:thread_clone_app/core/widgets/confirm_dialog.dart';
 import 'package:uuid/uuid.dart';
 
 // snackBar
@@ -65,4 +66,16 @@ String getS3Url(String path) {
 
 void confirmDialog(String title, String text , VoidCallback callback) {
   Get.dialog(ConfirmDialog(title: title, text: text, callback: callback,));
+}
+
+// format date
+String formateDateFromNow(String date) {
+  // Parse UTC timestamp string to DateTime
+  DateTime utcDateTime = DateTime.parse(date.split('+')[0].trim());
+
+  // Convert UTC to IST (UTC+5:30 for Indian Standard Time)
+  DateTime istDateTime = utcDateTime.add(const Duration(hours: 5, minutes: 30));
+
+  // Format the DateTime using Jiffy
+  return Jiffy.parseFromDateTime(istDateTime).fromNow();
 }

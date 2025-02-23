@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/profile_controller.dart';
-import 'package:thread_clone_app/route/route_names.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/utils/styles/button_styles.dart';
-import 'package:thread_clone_app/widgets/image_circle.dart';
+import 'package:thread_clone_app/core/route/route_names.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/utils/styles/button_styles.dart';
+import 'package:thread_clone_app/core/widgets/comment_card.dart';
+import 'package:thread_clone_app/core/widgets/image_circle.dart';
+import 'package:thread_clone_app/core/widgets/loading.dart';
+import 'package:thread_clone_app/core/widgets/post_card.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,6 +19,16 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final ProfileController profileController = Get.put(ProfileController());
   final SupabaseService supabaseService = Get.find<SupabaseService>();
+
+  @override
+  void initState() {
+    if (supabaseService.currentUser.value?.id != null) {
+      profileController.fetchPosts(supabaseService.currentUser.value!.id);
+      profileController.fetchComments(supabaseService.currentUser.value!.id);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,12 +143,47 @@ class _ProfileState extends State<Profile> {
           },
           body: TabBarView(
             children: [
-              Center(
-                  child:
-                      Text("Threads Content")), 
-              Center(
-                  child:
-                      Text("Replies Content")), 
+              Obx(
+                () => SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      if (profileController.postLoading.value)
+                        const Loading()
+                      else if (profileController.posts.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: profileController.posts.length,
+                          itemBuilder: (context,index)=> PostCard(post: profileController.posts[index]),
+                        )
+                      else
+                      const Center(child: Text("No Posts yet"),),
+                    ],
+                  ),
+                ),
+              ),
+              Obx(()=> SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10,),
+                    if(profileController.postLoading.value)
+                        const Loading()
+                      else if (profileController.posts.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: profileController.comments.length,
+                          itemBuilder: (context,index)=> CommentCard(comment: profileController.comments[index]!),
+                        )
+                      else
+                      const Center(child: Text("No replies yet"),),
+                  ],
+                ),
+              ),),
             ],
           ),
         ),

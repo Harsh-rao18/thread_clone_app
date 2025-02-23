@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thread_clone_app/utils/type_def.dart';
+import 'package:thread_clone_app/core/utils/type_def.dart';
 
 class AuthInput extends StatelessWidget {
   final String hintText;

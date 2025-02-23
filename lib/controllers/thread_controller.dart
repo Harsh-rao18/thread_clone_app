@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:thread_clone_app/services/navigation_service.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/utils/env.dart';
-import 'package:thread_clone_app/utils/helpers.dart';
+import 'package:thread_clone_app/core/services/navigation_service.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/utils/env.dart';
+import 'package:thread_clone_app/core/utils/helpers.dart';
 import 'package:uuid/uuid.dart';
 
 class ThreadController extends GetxController {

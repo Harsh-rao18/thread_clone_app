@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thread_clone_app/core/utils/helpers.dart';
 import 'package:thread_clone_app/model/post_model.dart';
 
 class PostTopBar extends StatelessWidget {
@@ -23,7 +24,7 @@ class PostTopBar extends StatelessWidget {
         Row(
           children: [
             Text(
-              "9 hours ago", // Replace with actual timestamp logic
+              formateDateFromNow(post.createdAt!),
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey[600],

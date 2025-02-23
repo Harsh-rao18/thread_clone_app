@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/profile_controller.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/widgets/image_circle.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/widgets/image_circle.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});

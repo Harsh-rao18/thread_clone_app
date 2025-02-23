@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:thread_clone_app/model/post_model.dart';
-import 'package:thread_clone_app/widgets/image_circle.dart';
-import 'package:thread_clone_app/widgets/post_bottom_bar.dart';
-import 'package:thread_clone_app/widgets/post_card_image.dart';
-import 'package:thread_clone_app/widgets/post_top_bar.dart';
+import 'package:thread_clone_app/core/widgets/image_circle.dart';
+import 'package:thread_clone_app/core/widgets/post_bottom_bar.dart';
+import 'package:thread_clone_app/core/widgets/post_card_image.dart';
+import 'package:thread_clone_app/core/widgets/post_top_bar.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;

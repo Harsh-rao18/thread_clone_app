@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/auth_controller.dart';
-import 'package:thread_clone_app/widgets/auth_input.dart';
+import 'package:thread_clone_app/core/widgets/auth_input.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

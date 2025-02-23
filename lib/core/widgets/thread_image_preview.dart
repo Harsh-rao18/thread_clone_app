@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/thread_controller.dart';
 
 class ThreadImagePreview extends StatelessWidget {
+  
   ThreadImagePreview({super.key});
   final ThreadController threadController = Get.find<ThreadController>();
 

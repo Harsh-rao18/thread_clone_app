@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:thread_clone_app/route/route.dart';
-import 'package:thread_clone_app/route/route_names.dart';
-import 'package:thread_clone_app/services/storage_service.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/theme/theme.dart';
+import 'package:thread_clone_app/core/route/route.dart';
+import 'package:thread_clone_app/core/route/route_names.dart';
+import 'package:thread_clone_app/core/services/storage_service.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

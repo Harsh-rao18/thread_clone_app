@@ -1,5 +1,5 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:thread_clone_app/utils/storage_keys.dart';
+import 'package:thread_clone_app/core/utils/storage_keys.dart';
 
 class StorageService {
   static final session = GetStorage();

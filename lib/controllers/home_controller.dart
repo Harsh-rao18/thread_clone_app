@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:thread_clone_app/model/post_model.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
 
 class HomeController extends GetxController {
   var loading = false.obs;

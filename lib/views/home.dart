@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thread_clone_app/services/navigation_service.dart';
+import 'package:thread_clone_app/core/services/navigation_service.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});

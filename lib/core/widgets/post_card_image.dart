@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thread_clone_app/utils/helpers.dart';
+import 'package:thread_clone_app/core/utils/helpers.dart';
 
 class PostCardImage extends StatelessWidget {
   final String url;
-
   const PostCardImage({super.key, required this.url});
 
   @override

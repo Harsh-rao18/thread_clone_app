@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/thread_controller.dart';
-import 'package:thread_clone_app/services/supabase_service.dart';
-import 'package:thread_clone_app/widgets/add_thread_app_bar.dart';
-import 'package:thread_clone_app/widgets/image_circle.dart';
-import 'package:thread_clone_app/widgets/thread_image_preview.dart';
+import 'package:thread_clone_app/core/services/supabase_service.dart';
+import 'package:thread_clone_app/core/widgets/add_thread_app_bar.dart';
+import 'package:thread_clone_app/core/widgets/image_circle.dart';
+import 'package:thread_clone_app/core/widgets/thread_image_preview.dart';
 
 class Threads extends StatelessWidget {
   Threads({super.key});

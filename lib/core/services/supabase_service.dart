@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:thread_clone_app/utils/env.dart';
+import 'package:thread_clone_app/core/utils/env.dart';
 
 class SupabaseService extends GetxService {
   
