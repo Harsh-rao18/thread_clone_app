@@ -20,14 +20,16 @@ class _ProfileState extends State<Profile> {
   final ProfileController profileController = Get.put(ProfileController());
   final SupabaseService supabaseService = Get.find<SupabaseService>();
 
-  @override
-  void initState() {
-    if (supabaseService.currentUser.value?.id != null) {
-      profileController.fetchPosts(supabaseService.currentUser.value!.id);
-      profileController.fetchComments(supabaseService.currentUser.value!.id);
-    }
-    super.initState();
+@override
+void initState() {
+  super.initState();
+  final userId = supabaseService.currentUser.value?.id;
+  if (userId != null) {
+    profileController.fetchPosts(userId);
+    profileController.fetchComments(userId);
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -170,9 +172,9 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: [
                     const SizedBox(height: 10,),
-                    if(profileController.postLoading.value)
+                    if(profileController.replyLoading.value)
                         const Loading()
-                      else if (profileController.posts.isNotEmpty)
+                      else if (profileController.comments.isNotEmpty)
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),

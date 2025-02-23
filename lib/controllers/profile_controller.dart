@@ -66,23 +66,24 @@ class ProfileController extends GetxController {
   }
 
   Future<void> fetchPosts(String userId) async {
-    try {
-      postLoading.value = true;
-      final List<dynamic> data =
-          await SupabaseService.client.from("posts").select('''
-    id ,content , image ,created_at ,comment_count,like_count,
-    user:user_id (email , metadata), likes:likes (user_id ,post_id)
-''').eq("user_id", userId).order("id", ascending: false);
+  try {
+    postLoading.value = true;
+    print("Fetching posts for user: $userId"); // Debug log
 
-      postLoading.value = false;
-      if (data.isNotEmpty) {
-        posts.value = [for (var item in data) PostModel.fromJson(item)];
-      }
-    } catch (e) {
-      postLoading.value = false;
-      showSnackbar("Error", "something went wrong");
-    }
+    final List<dynamic> data = await SupabaseService.client.from('posts')
+    .select('id, content, image, created_at, comment_count, like_count, user_id, users(email, metadata)').eq("user_id", userId).order("id", ascending: false);
+
+    print("Fetched data: $data"); // Debug log
+
+    posts.value = data.map((item) => PostModel.fromJson(item)).toList();
+  } catch (e) {
+    print("Error fetching posts: $e"); // Debug log
+    showSnackbar("Error", "Something went wrong while fetching posts");
+  } finally {
+    postLoading.value = false;
   }
+}
+
 
   // * Fetch user replies
   Future<void> fetchComments(String userId) async {

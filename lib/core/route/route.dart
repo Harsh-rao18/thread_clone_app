@@ -6,6 +6,8 @@ import 'package:thread_clone_app/views/home.dart';
 import 'package:thread_clone_app/views/profile/edit_profile.dart';
 import 'package:thread_clone_app/views/replies/add_reply.dart';
 import 'package:thread_clone_app/views/settings/settings.dart';
+import 'package:thread_clone_app/views/threads/show_image.dart';
+import 'package:thread_clone_app/views/threads/show_thread.dart';
 
 class Routes {
   static final pages = [
@@ -33,6 +35,16 @@ class Routes {
       name: RouteNames.replies,
       page: () => AddComment(),
       transition: Transition.downToUp
+    ),
+    GetPage(
+      name: RouteNames.showThread,
+      page: () => ShowThread(),
+      transition: Transition.leftToRight
+    ),
+    GetPage(
+      name: RouteNames.showImage,
+      page: () => ShowImage(),
+      transition: Transition.leftToRight
     ),
   ];
 }
