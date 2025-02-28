@@ -20,16 +20,15 @@ class _ProfileState extends State<Profile> {
   final ProfileController profileController = Get.put(ProfileController());
   final SupabaseService supabaseService = Get.find<SupabaseService>();
 
-@override
-void initState() {
-  super.initState();
-  final userId = supabaseService.currentUser.value?.id;
-  if (userId != null) {
-    profileController.fetchPosts(userId);
-    profileController.fetchComments(userId);
+  @override
+  void initState() {
+    super.initState();
+    final userId = supabaseService.currentUser.value?.id;
+    if (userId != null) {
+      profileController.fetchPosts(userId);
+      profileController.fetchComments(userId);
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -159,33 +158,46 @@ void initState() {
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),
                           itemCount: profileController.posts.length,
-                          itemBuilder: (context,index)=> PostCard(post: profileController.posts[index]),
+                          itemBuilder: (context, index) => PostCard(
+                            post: profileController.posts[index],
+                            isAuthCard: true,
+                            callBack: profileController.deleteThread,
+                          ),
                         )
                       else
-                      const Center(child: Text("No Posts yet"),),
+                        const Center(
+                          child: Text("No Posts yet"),
+                        ),
                     ],
                   ),
                 ),
               ),
-              Obx(()=> SingleChildScrollView(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10,),
-                    if(profileController.replyLoading.value)
+              Obx(
+                () => SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      if (profileController.replyLoading.value)
                         const Loading()
                       else if (profileController.comments.isNotEmpty)
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),
                           itemCount: profileController.comments.length,
-                          itemBuilder: (context,index)=> CommentCard(comment: profileController.comments[index]!),
+                          itemBuilder: (context, index) => CommentCard(
+                              comment: profileController.comments[index]!),
                         )
                       else
-                      const Center(child: Text("No replies yet"),),
-                  ],
+                        const Center(
+                          child: Text("No replies yet"),
+                        ),
+                    ],
+                  ),
                 ),
-              ),),
+              ),
             ],
           ),
         ),

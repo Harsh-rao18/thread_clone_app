@@ -7,6 +7,7 @@ import 'package:thread_clone_app/core/utils/env.dart';
 import 'package:thread_clone_app/core/utils/helpers.dart';
 import 'package:thread_clone_app/model/comment_model.dart';
 import 'package:thread_clone_app/model/post_model.dart';
+import 'package:thread_clone_app/model/user_model.dart';
 
 class ProfileController extends GetxController {
   var loading = false.obs;
@@ -15,6 +16,9 @@ class ProfileController extends GetxController {
   RxList<PostModel> posts = RxList<PostModel>();
   var replyLoading = false.obs;
   RxList<CommentModel?> comments = RxList<CommentModel?>();
+
+  var userLoading = false.obs;
+  Rx<UserModel?> user = Rx<UserModel?>(null);
 
   // pickImage
   void pickImage() async {
@@ -99,4 +103,51 @@ class ProfileController extends GetxController {
       showSnackbar("Error", "something wnt wrong");
     }
   }
+
+  // get user
+    Future<void> getUser(String userId) async {
+    userLoading.value = true;
+    var data = await SupabaseService.client
+        .from("users")
+        .select("*")
+        .eq("id", userId)
+        .single();
+    userLoading.value = false;
+    user.value = UserModel.fromJson(data);
+
+    // * Fetch posts and comments
+    fetchPosts(userId);
+    fetchComments(userId);
+  }
+
+   // * Delete thread
+  Future<void> deleteThread(int postId) async {
+    try {
+      await SupabaseService.client.from("posts").delete().eq("id", postId);
+
+      posts.removeWhere((element) => element.id == postId);
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+      showSnackbar("Success", "thread deleted successfully!");
+    } catch (e) {
+      showSnackbar("Error", "Something went wrong.pls try again.");
+    }
+  }
+
+  // * Delete comments
+  Future<void> deleteReply(int replyId) async {
+    try {
+      await SupabaseService.client.from("comments").delete().eq("id", replyId);
+
+      comments.removeWhere((element) => element?.id == replyId);
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
+      showSnackbar("Success", "Reply deleted successfully!");
+    } catch (e) {
+      showSnackbar("Error", "Something went wrong.pls try again.");
+    }
+  }
+
 }

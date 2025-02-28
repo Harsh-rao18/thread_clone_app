@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/core/route/route_names.dart';
+import 'package:thread_clone_app/core/utils/type_def.dart';
 import 'package:thread_clone_app/model/post_model.dart';
 import 'package:thread_clone_app/core/widgets/image_circle.dart';
 import 'package:thread_clone_app/core/widgets/post_bottom_bar.dart';
@@ -9,7 +10,9 @@ import 'package:thread_clone_app/core/widgets/post_top_bar.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
-  const PostCard({super.key, required this.post});
+  final bool isAuthCard;
+  final DeleteCallBack? callBack;
+  const PostCard({super.key, required this.post, this.isAuthCard = false, this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class PostCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    PostTopBar(post: post),
+                    PostTopBar(post: post,isAuthCard: isAuthCard, callBack: callBack,),
                     const SizedBox(height: 5),
                     GestureDetector(
                       onTap: () => {
