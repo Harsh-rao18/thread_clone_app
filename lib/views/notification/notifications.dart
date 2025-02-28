@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thread_clone_app/controllers/notification_controller.dart';
+import 'package:thread_clone_app/core/route/route_names.dart';
 import 'package:thread_clone_app/core/services/navigation_service.dart';
 import 'package:thread_clone_app/core/services/supabase_service.dart';
 import 'package:thread_clone_app/core/utils/helpers.dart';
@@ -45,6 +46,7 @@ class _NotificationsState extends State<Notifications> {
                         physics: const BouncingScrollPhysics(),
                         itemCount: controller.notifications.length,
                         itemBuilder: (context,index) => ListTile(
+                          onTap: () => Get.toNamed(RouteNames.showThread,arguments: controller.notifications[index]!.postId),
                           leading: ImageCircle(radius: 20,url: controller.notifications[index]?.user?.metadata?.image,),
                           title: Text(controller.notifications[index]!.user!.metadata!.name!),
                           subtitle: Text(controller.notifications[index]!.notification!),

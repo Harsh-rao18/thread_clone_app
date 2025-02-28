@@ -103,6 +103,37 @@ class ThreadController extends GetxController {
     }
   }
 
+  // like dislike
+  Future<void> likeDislike(
+      String status, int postId, String postUserId, String userId) async {
+    if (status == "1") {
+      await SupabaseService.client
+          .from("likes")
+          .insert({"user_id": userId, "post_id": postId});
+
+      // * Add Comment notification
+      await SupabaseService.client.from("notifications").insert({
+        "user_id": userId,
+        "notification": "liked on your post.",
+        "to_user_id": postUserId,
+        "post_id": postId,
+      });
+
+      // * Increment like counter in post table
+      await SupabaseService.client
+          .rpc("like_increment", params: {"count": 1, "row_id": postId});
+    } else if (status == "0") {
+      await SupabaseService.client
+          .from("likes")
+          .delete()
+          .match({"user_id": userId, "post_id": postId});
+
+      // * Decrement like counter in post table
+      await SupabaseService.client
+          .rpc("like_decrement", params: {"count": 1, "row_id": postId});
+    }
+  }
+
   // to reset thread state
   void reset() {
     textEditingController.clear();
